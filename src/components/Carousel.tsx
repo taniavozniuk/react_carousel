@@ -1,36 +1,70 @@
 import React, { useState } from 'react';
 import './Carousel.scss';
 
-const Carousel: React.FC = () => (
-  const [currentIndex, setCurrentIndex] = useState(0) // індекс активного зображення
+interface CarouselProps {
+  images: string[];
+  itemWigth: number;
+  frameSize: number;
+}
 
-  const images = [
-    'src/img/1.png',
-    'src/img/2.png',
-    'src/img/3.png',
-    'src/img/4.png',
-    'src/img/5.png',
-    'src/img/6.png',
-    'src/img/7.png',
-    'src/img/8.png',
-    'src/img/9.png',
-    'src/img/10.png',
-  ];
+const Carousel: React.FC<CarouselProps> = ({
+  images,
+  itemWigth = 130,
+  frameSize = 3,
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const maxIndex = images.length - frameSize;
+
+  const buttonNext = () => {
+    setCurrentIndex(prevIndex =>
+      prevIndex < maxIndex ? prevIndex : prevIndex,
+    );
+  };
+
+  const buttonPrev = () => {
+    setCurrentIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+  };
 
   return (
-  <div className="Carousel">
-  <ul className="Carousel__list">
-        {images.map((src, index) => {
-          <li key={index}>
-        <img src='src' alt={`Image ${index + 1}`} />
-      </li>
-    })}
-  </ul>
+    <div className="Carousel" style={{ width: `${itemWigth * frameSize}px` }}>
+      <div className="Carousel__wrapper">
+        <ul
+          className="Carousel__list"
+          style={{
+            transform: `translateX(-${currentIndex * itemWigth}px)`,
+          }}
+        >
+          {images.map((src, index) => (
+            <li
+              key={index}
+              className={index === currentIndex ? 'active' : ''}
+              style={{ width: `${itemWigth}px` }}
+            >
+              <img src={src} alt={`Image ${index + 1}`} />
+            </li>
+          ))}
+        </ul>
+      </div>
 
-  <button type="button">Prev</button>
-  <button type="button">Next</button>
-</div>
-    )
-);
+      <button
+        type="button"
+        className="buttonPrev"
+        onClick={buttonPrev}
+        disabled={currentIndex === 0}
+      >
+        Prev
+      </button>
+      <button
+        type="button"
+        className="buttonNext"
+        onClick={buttonNext}
+        disabled={currentIndex >= maxIndex}
+      >
+        Next
+      </button>
+    </div>
+  );
+};
 
 export default Carousel;

@@ -1,12 +1,59 @@
 // style go here
-.Carousel
-{
-  width: 260px;
-  overflow: hidden;
+.Carousel {
+  flex-direction: column;
+  position: relative;
+
+
+  &__wrapper {
+    width: 260px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  &__list {
+    display: flex;
+    width: 1300px;
+    list-style: none;
+    gap: 10px;
+    padding: 0;
+  }
 }
 
-.Carousel__list{
+.buttonPrev{
+  width: 20%;
+  height: 50px;
+  border-radius: 8px;
+  background-color: #f1de0c;
+  color: #fff;
   display: flex;
-  width: 130px;
-  height: 130px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 27px;
+  text-decoration: none;
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.buttonNext{
+  width: 20%;
+  height: 50px;
+  border-radius: 8px;
+  background-color: #f1860c;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 27px;
+  text-decoration: none;
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
 }
