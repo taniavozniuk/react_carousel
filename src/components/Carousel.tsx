@@ -3,43 +3,60 @@ import './Carousel.scss';
 
 interface CarouselProps {
   images: string[];
-  itemWigth: number;
+  itemWidth: number;
   frameSize: number;
+  step: number;
+  animationDuration: number;
+  infinite: boolean;
 }
 
 const Carousel: React.FC<CarouselProps> = ({
   images,
-  itemWigth = 130,
+  itemWidth = 130,
   frameSize = 3,
+  step = 3,
+  animationDuration = 1000,
+  infinite = false,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const maxIndex = images.length - frameSize;
+  const maxIndex = Math.max(0, images.length - frameSize); // Ensure no negative maxIndex.
 
   const buttonNext = () => {
-    setCurrentIndex(prevIndex =>
-      prevIndex < maxIndex ? prevIndex : prevIndex,
-    );
+    setCurrentIndex(prevIndex => {
+      if (infinite) {
+        return (prevIndex + step) % images.length;
+      }
+
+      return Math.min(prevIndex + step, maxIndex);
+    });
   };
 
   const buttonPrev = () => {
-    setCurrentIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+    setCurrentIndex(prevIndex => {
+      if (infinite) {
+        return (prevIndex - step + images.length) % images.length;
+      }
+
+      return Math.min(prevIndex - step, 0);
+    });
   };
 
   return (
-    <div className="Carousel" style={{ width: `${itemWigth * frameSize}px` }}>
-      <div className="Carousel__wrapper">
+    <div className="Carousel" style={{ width: `${itemWidth * frameSize}px` }}>
+      <div className="Carousel__wrapper" style={{ overflow: 'hidden' }}>
         <ul
           className="Carousel__list"
           style={{
-            transform: `translateX(-${currentIndex * itemWigth}px)`,
+            transition: `transform ${animationDuration}ms ease`,
+            transform: `translateX(-${currentIndex * itemWidth}px)`,
           }}
         >
           {images.map((src, index) => (
             <li
               key={index}
               className={index === currentIndex ? 'active' : ''}
-              style={{ width: `${itemWigth}px` }}
+              style={{ width: `${itemWidth}px` }}
             >
               <img src={src} alt={`Image ${index + 1}`} />
             </li>
@@ -56,6 +73,7 @@ const Carousel: React.FC<CarouselProps> = ({
         Prev
       </button>
       <button
+        data-cy="next"
         type="button"
         className="buttonNext"
         onClick={buttonNext}
