@@ -54,11 +54,7 @@ const Carousel: React.FC<CarouselProps> = ({
         >
           {images.map((src, index) => (
             <li key={index} className={index === currentIndex ? 'active' : ''}>
-              <img
-                style={{ width: `${itemWidth}px` }}
-                src={src}
-                alt={`Image ${index + 1}`}
-              />
+              <img width={itemWidth} src={src} alt={`Image ${index + 1}`} />
             </li>
           ))}
         </ul>
@@ -68,7 +64,7 @@ const Carousel: React.FC<CarouselProps> = ({
           type="button"
           className="buttonPrev"
           onClick={buttonPrev}
-          disabled={infinite && currentIndex === 0}
+          disabled={!infinite && currentIndex === 0}
         >
           Prev
         </button>
@@ -77,7 +73,7 @@ const Carousel: React.FC<CarouselProps> = ({
           type="button"
           className="buttonNext"
           onClick={buttonNext}
-          disabled={infinite && currentIndex >= maxIndex}
+          disabled={!infinite && currentIndex >= maxIndex}
         >
           Next
         </button>

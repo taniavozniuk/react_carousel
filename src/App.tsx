@@ -64,9 +64,10 @@ class App extends React.Component<{}, State> {
         />
 
         <div className="setting">
-          <label className="options__row">
+          <label htmlFor="itemWidthId" className="options__row">
             itemWidth:
             <input
+              id="itemWidthId"
               className="option__input"
               type="number"
               name="itemWidth"
@@ -75,9 +76,10 @@ class App extends React.Component<{}, State> {
             ></input>
           </label>
 
-          <label className="options__row">
+          <label htmlFor="stepId" className="options__row">
             Step:
             <input
+              id="stepId"
               className="option__input"
               type="number"
               name="step"
@@ -86,9 +88,10 @@ class App extends React.Component<{}, State> {
             ></input>
           </label>
 
-          <label className="options__row">
+          <label htmlFor="frameSizeId" className="options__row">
             Frame Size:
             <input
+              id="frameSize"
               className="option__input"
               type="number"
               name="frameSize"
@@ -97,9 +100,10 @@ class App extends React.Component<{}, State> {
             ></input>
           </label>
 
-          <label className="options__row">
+          <label htmlFor="animationDurationId" className="options__row">
             Animation Duration
             <input
+              id="animationDurationId"
               className="option__input"
               type="number"
               name="animationDuration"
@@ -108,9 +112,10 @@ class App extends React.Component<{}, State> {
             ></input>
           </label>
 
-          <label className="options__row">
+          <label htmlFor="infiniteId" className="options__row">
             infinite
             <input
+              id="infiniteId"
               className="option__input"
               type="checkbox"
               name="infinite"
