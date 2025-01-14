@@ -16,11 +16,11 @@ const Carousel: React.FC<CarouselProps> = ({
   frameSize = 3,
   step = 3,
   animationDuration = 1000,
-  infinite = false,
+  infinite = true,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const maxIndex = Math.max(0, images.length - frameSize); // Ensure no negative maxIndex.
+  const maxIndex = Math.max(0, images.length - frameSize);
 
   const buttonNext = () => {
     setCurrentIndex(prevIndex => {
@@ -38,7 +38,7 @@ const Carousel: React.FC<CarouselProps> = ({
         return (prevIndex - step + images.length) % images.length;
       }
 
-      return Math.min(prevIndex - step, 0);
+      return Math.max(prevIndex - step, 0);
     });
   };
 
@@ -53,34 +53,35 @@ const Carousel: React.FC<CarouselProps> = ({
           }}
         >
           {images.map((src, index) => (
-            <li
-              key={index}
-              className={index === currentIndex ? 'active' : ''}
-              style={{ width: `${itemWidth}px` }}
-            >
-              <img src={src} alt={`Image ${index + 1}`} />
+            <li key={index} className={index === currentIndex ? 'active' : ''}>
+              <img
+                style={{ width: `${itemWidth}px` }}
+                src={src}
+                alt={`Image ${index + 1}`}
+              />
             </li>
           ))}
         </ul>
       </div>
-
-      <button
-        type="button"
-        className="buttonPrev"
-        onClick={buttonPrev}
-        disabled={currentIndex === 0}
-      >
-        Prev
-      </button>
-      <button
-        data-cy="next"
-        type="button"
-        className="buttonNext"
-        onClick={buttonNext}
-        disabled={currentIndex >= maxIndex}
-      >
-        Next
-      </button>
+      <div className="conteiner__button">
+        <button
+          type="button"
+          className="buttonPrev"
+          onClick={buttonPrev}
+          disabled={infinite && currentIndex === 0}
+        >
+          Prev
+        </button>
+        <button
+          data-cy="next"
+          type="button"
+          className="buttonNext"
+          onClick={buttonNext}
+          disabled={infinite && currentIndex >= maxIndex}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
