@@ -64,7 +64,12 @@ class App extends React.Component<{}, State> {
         />
 
         <div className="setting">
-          <label htmlFor="itemWidthId" className="options__row">
+          <label
+            htmlFor="frameId"
+            htmlFor="itemId"
+            htmlFor="itemWidthId"
+            className="options__row"
+          >
             itemWidth:
             <input
               id="itemWidthId"
