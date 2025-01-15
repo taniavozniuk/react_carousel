@@ -64,15 +64,10 @@ class App extends React.Component<{}, State> {
         />
 
         <div className="setting">
-          <label
-            htmlFor="frameId"
-            htmlFor="itemId"
-            htmlFor="itemWidthId"
-            className="options__row"
-          >
+          <label htmlFor="itemId" className="options__row">
             itemWidth:
             <input
-              id="itemWidthId"
+              id="itemId"
               className="option__input"
               type="number"
               name="itemWidth"
@@ -89,26 +84,30 @@ class App extends React.Component<{}, State> {
               type="number"
               name="step"
               value={step}
+              min={1}
+              max={5}
               onChange={this.handleInputChange}
             ></input>
           </label>
 
-          <label htmlFor="frameSizeId" className="options__row">
+          <label htmlFor="frameId" className="options__row">
             Frame Size:
             <input
-              id="frameSize"
+              id="frameId"
               className="option__input"
               type="number"
               name="frameSize"
               value={frameSize}
+              min={1}
+              max={4}
               onChange={this.handleInputChange}
             ></input>
           </label>
 
-          <label htmlFor="animationDurationId" className="options__row">
+          <label htmlFor="animationId" className="options__row">
             Animation Duration
             <input
-              id="animationDurationId"
+              id="animationId"
               className="option__input"
               type="number"
               name="animationDuration"
