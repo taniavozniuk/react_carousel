@@ -72,6 +72,8 @@ class App extends React.Component<{}, State> {
               type="number"
               name="itemWidth"
               value={itemWidth}
+              min={50}
+              max={500}
               onChange={this.handleInputChange}
             ></input>
           </label>
